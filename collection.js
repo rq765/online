@@ -9,12 +9,10 @@
         }
 
         init() {
-            console.log("LAMPA MANIFEST")
-            console.log(Lampa.Manifest.origin)
-            if (Lampa.Manifest.origin !== 'bylampa') {
-                Lampa.Noty.show('Ошибка доступа');
-                return;
-            }
+            // if (Lampa.Manifest.origin !== 'bylampa') {
+            //     Lampa.Noty.show('Ошибка доступа');
+            //     return;
+            // }
 
             this.today = new Date().toISOString().substr(0, 10);
             this.setupCollections();
