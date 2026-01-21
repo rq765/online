@@ -9,6 +9,7 @@
         }
 
         init() {
+
             // if (Lampa.Manifest.origin !== 'bylampa') {
             //     Lampa.Noty.show('Ошибка доступа');
             //     return;
@@ -97,8 +98,8 @@
             ];
         }
 
-        createCollectionsComponent() {
-            const createCategoryComponent = (settings) => {
+        createCollectionsComponent(settings) {
+            // const createCategoryComponent = (settings) => {
                 const categoryComponent = Lampa.Maker.make('Category', settings);
 
                 return categoryComponent.use({
@@ -140,9 +141,9 @@
                         });
                     }
                 });
-            };
+            // };
 
-            return createCategoryComponent;
+            // return createCategoryComponent;
         }
 
         setupMenu() {
