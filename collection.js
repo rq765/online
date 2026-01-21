@@ -97,17 +97,63 @@
             ];
         }
 
-        createCollectionsComponent() {
-            const createCategoryComponent = (settings) => {
-                const categoryComponent = Lampa.Maker.make('Category', settings);
+        // createCollectionsComponent() {
+        //     const createCategoryComponent = (settings) => {
+        //         const categoryComponent = Lampa.Maker.make('Category', settings);
+        //
+        //         return categoryComponent.use({
+        //             onCreate() {
+        //                 this.body.addClass('mapping--grid');
+        //                 this.body.addClass('cols--5');
+        //
+        //                 setTimeout(() => {
+        //                     const data = {
+        //                         results: this.collections.map(collection => ({
+        //                             title: collection.title,
+        //                             img: collection.img,
+        //                             params: {
+        //                                 style: { name: 'collection' },
+        //                                 module: Lampa.Maker.module('Card').only('Card', 'Callback', 'Style')
+        //                             },
+        //                             data: {
+        //                                 url: collection.request,
+        //                                 title: collection.title,
+        //                                 component: 'category_full',
+        //                                 source: 'tmdb',
+        //                                 page: 1
+        //                             }
+        //                         }))
+        //                     };
+        //
+        //                     this.build(data);
+        //                     $('.card', this.body).css('text-align', 'center');
+        //                 }, 100);
+        //             },
+        //
+        //             onInstance(instance, itemData) {
+        //                 instance.use({
+        //                     onlyEnter() {
+        //                         if (itemData && itemData.data) {
+        //                             Lampa.Activity.push(itemData.data);
+        //                         }
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //     };
+        //
+        //     return createCategoryComponent;
+        // }
 
-                return categoryComponent.use({
+        createCollectionsComponent() {
+            return (data) => { // Возвращаем функцию-фабрику
+                const component = Lampa.Maker.make('Category', {
                     onCreate() {
                         this.body.addClass('mapping--grid');
                         this.body.addClass('cols--5');
 
                         setTimeout(() => {
-                            const data = {
+                            const collectionsData = {
                                 results: this.collections.map(collection => ({
                                     title: collection.title,
                                     img: collection.img,
@@ -125,7 +171,7 @@
                                 }))
                             };
 
-                            this.build(data);
+                            this.build(collectionsData);
                             $('.card', this.body).css('text-align', 'center');
                         }, 100);
                     },
@@ -140,9 +186,9 @@
                         });
                     }
                 });
-            };
 
-            return createCategoryComponent;
+                return component;
+            };
         }
 
         setupMenu() {
