@@ -1068,7 +1068,7 @@
             var favs = str.match(/<input type="hidden" id="ctrl_favs" value="([^"]*)"/);
             if (favs) extract.favs = favs[1];
             var blocked = str.match(/class="b-player__restricted__block_message"/);
-            // if (blocked) extract.blocked = true;
+            if (blocked) extract.blocked = true;
         }
 
         function getEpisodes(call) {
