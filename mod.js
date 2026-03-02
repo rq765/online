@@ -569,24 +569,24 @@
         } : {};
         var prox_enc = '';
 
-        // if (prox) {
-        //     prox_enc += 'param/Origin=' + encodeURIComponent(host) + '/';
-        //     prox_enc += 'param/Referer=' + encodeURIComponent(ref) + '/';
-        //     prox_enc += 'param/User-Agent=' + encodeURIComponent(user_agent) + '/';
-        // }
+        if (prox) {
+            prox_enc += 'param/Origin=' + encodeURIComponent(host) + '/';
+            prox_enc += 'param/Referer=' + encodeURIComponent(ref) + '/';
+            prox_enc += 'param/User-Agent=' + encodeURIComponent(user_agent) + '/';
+        }
 
-        // var cookie = Lampa.Storage.get('online_mod_rezka2_cookie', '') + '';
-        // if (cookie.indexOf('PHPSESSID=') == -1) cookie = 'PHPSESSID=' + Utils.randomId(26) + (cookie ? '; ' + cookie : '');
-        //
-        // if (cookie) {
-        //     if (Lampa.Platform.is('android')) {
-        //         headers.Cookie = cookie;
-        //     }
-        //
-        //     if (prox) {
-        //         prox_enc += 'param/Cookie=' + encodeURIComponent(cookie) + '/';
-        //     }
-        // }
+        var cookie = Lampa.Storage.get('online_mod_rezka2_cookie', '') + '';
+        if (cookie.indexOf('PHPSESSID=') == -1) cookie = 'PHPSESSID=' + Utils.randomId(26) + (cookie ? '; ' + cookie : '');
+
+        if (cookie) {
+            if (Lampa.Platform.is('android')) {
+                headers.Cookie = cookie;
+            }
+
+            if (prox) {
+                prox_enc += 'param/Cookie=' + encodeURIComponent(cookie) + '/';
+            }
+        }
 
         var embed = ref;
         var filter_items = {};
