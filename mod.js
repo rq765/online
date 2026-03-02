@@ -152,7 +152,7 @@
           let proxy2 = (window.location.protocol === 'https:' ? 'https://' : 'http://') + 'iqslgbok.deploy.cx/'
       */
         var proxy2 = 'https://apn-latest.onrender.com/' + (param_ip ? '' : 'ip/');
-        var proxy5 = 'http://'+window.location.hostname+':8090/' + (param_ip ? '' : 'ip/');
+        var proxy5 = 'http://'+window.location.hostname+':8090/'
 
         var proxy3 = 'https://cors557.deno.dev/';
         var proxy_apn = '';
@@ -174,7 +174,7 @@
         var user_proxy1 = (proxy_other_url || proxy1) + param_ip;
         var user_proxy2 = (proxy_other_url || proxy2) + param_ip;
         var user_proxy3 = (proxy_other_url || proxy3) + param_ip;
-        var user_proxy5 = (proxy_other_url || proxy5) + param_ip;
+        var user_proxy5 = proxy5
         if (name === 'lumex_api') return user_proxy2;
         if (name === 'filmix_site') return proxy_secret_ip || user_proxy1;
         if (name === 'filmix_abuse') return window.location.protocol === 'https:' ? 'https://cors.apn.monster/' : 'http://cors.cfhttp.top/';
@@ -569,24 +569,24 @@
         } : {};
         var prox_enc = '';
 
-        if (prox) {
-            prox_enc += 'param/Origin=' + encodeURIComponent(host) + '/';
-            prox_enc += 'param/Referer=' + encodeURIComponent(ref) + '/';
-            prox_enc += 'param/User-Agent=' + encodeURIComponent(user_agent) + '/';
-        }
+        // if (prox) {
+        //     prox_enc += 'param/Origin=' + encodeURIComponent(host) + '/';
+        //     prox_enc += 'param/Referer=' + encodeURIComponent(ref) + '/';
+        //     prox_enc += 'param/User-Agent=' + encodeURIComponent(user_agent) + '/';
+        // }
 
-        var cookie = Lampa.Storage.get('online_mod_rezka2_cookie', '') + '';
-        if (cookie.indexOf('PHPSESSID=') == -1) cookie = 'PHPSESSID=' + Utils.randomId(26) + (cookie ? '; ' + cookie : '');
-
-        if (cookie) {
-            if (Lampa.Platform.is('android')) {
-                headers.Cookie = cookie;
-            }
-
-            if (prox) {
-                prox_enc += 'param/Cookie=' + encodeURIComponent(cookie) + '/';
-            }
-        }
+        // var cookie = Lampa.Storage.get('online_mod_rezka2_cookie', '') + '';
+        // if (cookie.indexOf('PHPSESSID=') == -1) cookie = 'PHPSESSID=' + Utils.randomId(26) + (cookie ? '; ' + cookie : '');
+        //
+        // if (cookie) {
+        //     if (Lampa.Platform.is('android')) {
+        //         headers.Cookie = cookie;
+        //     }
+        //
+        //     if (prox) {
+        //         prox_enc += 'param/Cookie=' + encodeURIComponent(cookie) + '/';
+        //     }
+        // }
 
         var embed = ref;
         var filter_items = {};
