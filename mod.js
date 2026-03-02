@@ -626,6 +626,7 @@
                 return;
             }
         }
+
         /**
          * Поиск
          * @param {Object} _object
@@ -658,7 +659,7 @@
                 var url = more_url + '&q=' + encodeURIComponent(query) + '&page=' + encodeURIComponent(page);
                 network.clear();
                 network.timeout(10000);
-                network["native"](component.proxyLink(url, prox, prox_enc, prox_enc, 'enc2t'), function (str) {
+                network["native"](component.proxyLink(url, prox, prox_enc, prox_enc), function (str) {
                     str = (str || '').replace(/\n/g, '');
                     checkErrorForm(str);
                     var links = str.match(/<div class="b-content__inline_item-link">\s*<a [^>]*>[^<]*<\/a>\s*<div>[^<]*<\/div>\s*<\/div>/g);
@@ -721,7 +722,7 @@
                         }
 
                         component.loading(false);
-                    } else if (error_message) component.empty(error_message);else component.emptyForQuery(select_title);
+                    } else if (error_message) component.empty(error_message); else component.emptyForQuery(select_title);
                 });
             };
 
@@ -923,12 +924,12 @@
             url = component.fixLink(url, ref);
             network.clear();
             network.timeout(10000);
-            network["native"](component.proxyLink(url, prox, prox_enc, 'enc2t'), function (str) {
+            network["native"](component.proxyLink(url, prox, prox_enc), function (str) {
                 extractData(str);
 
                 if (extract.film_id) {
                     getEpisodes(success);
-                } else if (error_message) component.empty(error_message);else component.emptyForQuery(select_title);
+                } else if (error_message) component.empty(error_message); else component.emptyForQuery(select_title, extract.expect_better_quality);
             }, function (a, c) {
                 component.empty(network.errorDecode(a, c));
             }, false, {
@@ -943,6 +944,7 @@
             filter();
             append(filtred());
         }
+
         /**
          * Получить данные о фильме
          * @param {String} str
@@ -957,12 +959,19 @@
             extract.is_series = false;
             extract.film_id = '';
             extract.favs = '';
+            extract.expect_better_quality = false;
             str = (str || '').replace(/\n/g, '');
             checkErrorForm(str);
             var translation = str.match(/<h2>В переводе<\/h2>:<\/td>\s*(<td>.*?<\/td>)/);
             var cdnSeries = str.match(/\.initCDNSeriesEvents\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,/);
             var cdnMovie = str.match(/\.initCDNMoviesEvents\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,/);
             var devVoiceName;
+
+            var waitingFilm = str.match(/Ожидаем[^<]*фильм[^<]*хорошем[^<]*качестве[^<]*/i);
+
+            if (waitingFilm) {
+                extract.expect_better_quality = true;
+            }
 
             if (translation) {
                 devVoiceName = $(translation[1]).text().trim();
@@ -1084,7 +1093,7 @@
                         postdata += '&action=get_episodes';
                         network.clear();
                         network.timeout(10000);
-                        network["native"](component.proxyLink(url, prox, prox_enc, 'enc2t'), function (json) {
+                        network["native"](component.proxyLink(url, prox, prox_enc), function (json) {
                             extractEpisodes(json, translator_id);
                             call();
                         }, function (a, c) {
@@ -1143,11 +1152,12 @@
 
             if (choice.voice_name) {
                 var inx = voice.indexOf(choice.voice_name);
-                if (inx == -1) choice.voice = 0;else if (inx !== choice.voice) {
+                if (inx == -1) choice.voice = 0; else if (inx !== choice.voice) {
                     choice.voice = inx;
                 }
             }
         }
+
         /**
          * Построить фильтр
          */
@@ -1170,7 +1180,7 @@
 
             if (choice.voice_name) {
                 var inx = filter_items.voice.indexOf(choice.voice_name);
-                if (inx == -1) choice.voice = 0;else if (inx !== choice.voice) {
+                if (inx == -1) choice.voice = 0; else if (inx !== choice.voice) {
                     choice.voice = inx;
                 }
             }
@@ -1178,13 +1188,14 @@
             if (choice.season_id) {
                 var _inx = filter_items.season_id.indexOf(choice.season_id);
 
-                if (_inx == -1) choice.season = 0;else if (_inx !== choice.season) {
+                if (_inx == -1) choice.season = 0; else if (_inx !== choice.season) {
                     choice.season = _inx;
                 }
             }
 
             component.filter(filter_items, choice);
         }
+
         /**
          * Получить поток
          * @param {*} element
@@ -1213,7 +1224,7 @@
 
             network.clear();
             network.timeout(10000);
-            network["native"](component.proxyLink(url, prox, prox_enc, 'enc2t'), function (json) {
+            network["native"](component.proxyLink(url, prox, prox_enc), function (json) {
                 if (json && json.url) {
                     var video = decode(json.url),
                         file = '',
@@ -1284,6 +1295,7 @@
 
             return x;
         }
+
         /**
          * Получить потоки
          * @param {String} str
@@ -1338,7 +1350,8 @@
                     return 0;
                 });
                 return items;
-            } catch (e) {}
+            } catch (e) {
+            }
 
             return [];
         }
@@ -1359,6 +1372,7 @@
 
             return subtitles.length ? subtitles : false;
         }
+
         /**
          * Отфильтровать файлы
          * @returns array
@@ -1400,6 +1414,7 @@
 
             return filtred;
         }
+
         /**
          * Показать файлы
          */
