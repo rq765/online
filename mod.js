@@ -151,7 +151,6 @@
         /*
           let proxy2 = (window.location.protocol === 'https:' ? 'https://' : 'http://') + 'iqslgbok.deploy.cx/'
       */
-        var proxy2 = 'https://apn-latest.onrender.com/' + (param_ip ? '' : 'ip/');
 
         var proxy5 = 'http://'+window.location.hostname+ ':8081' + '/' + (param_ip ? '' : 'ip/');
 
@@ -813,7 +812,7 @@
                         }
                     }
 
-                    if (cards.length == 1 && is_sure) getPage(cards[0].link);else if (items.length) {
+                    if (cards.length == 1 && is_sure) getPage(cards[0].link); else if (items.length) {
                         _this.wait_similars = true;
                         items.forEach(function (c) {
                             c.is_similars = true;
@@ -831,14 +830,14 @@
 
                         component.loading(false);
                     } else component.emptyForQuery(select_title);
-                } else if (error_message) component.empty(error_message);else component.emptyForQuery(select_title);
+                } else if (error_message) component.empty(error_message); else component.emptyForQuery(select_title);
             };
 
             var query_search = function query_search(query, data, callback) {
                 var postdata = 'q=' + encodeURIComponent(query);
                 network.clear();
                 network.timeout(10000);
-                network["native"](component.proxyLink(url, prox, prox_enc, 'enc2t'), function (str) {
+                network["native"](component.proxyLink(url, prox, prox_enc), function (str) {
                     str = (str || '').replace(/\n/g, '');
                     checkErrorForm(str);
                     var links = str.match(/<li><a href=.*?<\/li>/g);
@@ -855,7 +854,7 @@
                         checkErrorForm(str);
                     }
 
-                    if (error_message) component.empty(error_message);else component.empty(network.errorDecode(a, c));
+                    if (error_message) component.empty(error_message); else component.empty(network.errorDecode(a, c));
                 }, postdata, {
                     dataType: 'text',
                     withCredentials: logged_in,
@@ -865,7 +864,7 @@
 
             var query_title_search = function query_title_search() {
                 query_search(component.cleanTitle(select_title), [], function (data, have_more, query) {
-                    if (data && data.length && data.forEach) display(data, have_more, query);else display([]);
+                    if (data && data.length && data.forEach) display(data, have_more, query); else display([]);
                 });
             };
 
