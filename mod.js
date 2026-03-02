@@ -151,7 +151,7 @@
         /*
           let proxy2 = (window.location.protocol === 'https:' ? 'https://' : 'http://') + 'iqslgbok.deploy.cx/'
       */
-
+        var proxy2 = 'https://apn-latest.onrender.com/' + (param_ip ? '' : 'ip/');
         var proxy5 = 'http://'+window.location.hostname+ ':8081' + '/' + (param_ip ? '' : 'ip/');
 
         var proxy3 = 'https://cors557.deno.dev/';
@@ -174,7 +174,7 @@
         var user_proxy1 = (proxy_other_url || proxy1) + param_ip;
         var user_proxy2 = (proxy_other_url || proxy2) + param_ip;
         var user_proxy3 = (proxy_other_url || proxy3) + param_ip;
-        var user_proxy5 = proxy5 + param_ip;
+        var user_proxy5 = (proxy_other_url || proxy5) + param_ip;
         if (name === 'lumex_api') return user_proxy2;
         if (name === 'filmix_site') return proxy_secret_ip || user_proxy1;
         if (name === 'filmix_abuse') return window.location.protocol === 'https:' ? 'https://cors.apn.monster/' : 'http://cors.cfhttp.top/';
