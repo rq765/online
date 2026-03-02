@@ -152,7 +152,7 @@
           let proxy2 = (window.location.protocol === 'https:' ? 'https://' : 'http://') + 'iqslgbok.deploy.cx/'
       */
         var proxy2 = 'https://apn-latest.onrender.com/' + (param_ip ? '' : 'ip/');
-        var proxy5 = 'http://'+window.location.host+':8090/'
+        var proxy5 = 'http://'+window.location.host+':8090/proxy/'
 
         var proxy3 = 'https://cors557.deno.dev/';
         var proxy_apn = '';
