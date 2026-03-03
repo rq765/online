@@ -1993,6 +1993,12 @@
             var cdnMovie = str.match(/\.initCDNMoviesEvents\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,/);
             var devVoiceName;
 
+            var waitingFilm = str.match(/Ожидаем[^<]*фильм[^<]*хорошем[^<]*качестве[^<]*/i);
+
+            if (waitingFilm) {
+                extract.expect_better_quality = true;
+            }
+
             if (translation) {
                 devVoiceName = $(translation[1]).text().trim();
             }
