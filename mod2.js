@@ -13653,6 +13653,12 @@
                 en: 'no results',
                 zh: '没有结果'
             },
+            online_mod_waiting_film: {
+                ru: 'Ожидаем фильм в хорошем качестве',
+                uk: 'Очікуємо фільм у найкращій якості',
+                be: 'Чакаем фільм у лепшай якасці',
+                en: 'We are expecting the film in better quality.',
+            },
             online_mod_title: {
                 ru: 'Онлайн',
                 uk: 'Онлайн',
