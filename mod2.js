@@ -1957,7 +1957,7 @@
 
                 if (extract.film_id) {
                     getEpisodes(success);
-                } else if (error_message) component.empty(error_message);else component.emptyForQuery(select_title);
+                } else if (error_message) component.empty(error_message);else component.emptyForQuery(select_title, extract.expect_better_quality);
             }, function (a, c) {
                 component.empty(network.errorDecode(a, c));
             }, false, {
@@ -1986,6 +1986,7 @@
             extract.is_series = false;
             extract.film_id = '';
             extract.favs = '';
+            extract.expect_better_quality = false;
             str = (str || '').replace(/\n/g, '');
             checkErrorForm(str);
             var translation = str.match(/<h2>В переводе<\/h2>:<\/td>\s*(<td>.*?<\/td>)/);
@@ -13344,8 +13345,12 @@
          */
 
 
-        this.emptyForQuery = function (query) {
-            this.empty(Lampa.Lang.translate('online_mod_query_start') + ' (' + query + ') ' + Lampa.Lang.translate('online_mod_query_end'));
+        this.emptyForQuery = function (query, waitingFilm = false) {
+            let message = Lampa.Lang.translate('online_mod_query_start') + ' (' + query + ') ' + Lampa.Lang.translate('online_mod_query_end')
+            if (waitingFilm) {
+                message = Lampa.Lang.translate('online_mod_waiting_film')
+            }
+            this.empty(message);
         };
 
         this.getLastEpisode = function (items) {
